@@ -31,7 +31,7 @@ const findAllNasabah = async () => {
 const editNasabah = async (nomorKtp, nasabah) => {
     const newNasabah = await prisma.nasabah.update({
         where: {
-            nomorKtp: nomorKtp
+            nomorKtp: parseInt(nomorKtp)
         },
         data: {
             namaLengkap: nasabah.namaLengkap,
