@@ -1,0 +1,21 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Nasabah {
+  id String @id @default(cuid())
+  namaLengkap String
+  alamat String
+  tempatLahir String
+  tanggalLahir DateTime
+  nomorKtp String
+  nomorHandphone String
+}
