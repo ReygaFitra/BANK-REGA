@@ -28,7 +28,7 @@ const findAllNasabah = async () => {
     return allNasabah
 }
 
-const updateNasabah = async (nomorKtp, nasabah) => {
+const editNasabah = async (nomorKtp, nasabah) => {
     const newNasabah = await prisma.nasabah.update({
         where: {
             nomorKtp: nomorKtp
@@ -57,6 +57,6 @@ module.exports = {
     insertNasabah,
     findNasabahByKtp,
     findAllNasabah,
-    updateNasabah,
+    editNasabah,
     deleteNasabah
 }
