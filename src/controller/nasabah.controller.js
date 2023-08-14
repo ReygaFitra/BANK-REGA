@@ -8,31 +8,45 @@ router.post('/', async (req, res) => {
     try {
         const newNasabah = req.body
         const nasabah = await createNasabah(newNasabah)
-
+    
         res.send({
             data: nasabah,
             message: "Nasabah berhasil ditambahkan"
         })
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send({
+            error: "Gagal menambahkan nasabah",
+            details: error.message
+        })
     }
 })
 
 router.get('/:nomorKtp', async (req, res) => {
     try {
-        const nasabahKtp = req.params.nomorKtp
+        const nasabahKtp = req.params.nomorKtp 
         const nasabah = await getNasabahByKtp(nasabahKtp)
 
-        res.send(nasabah)
+        res.send(nasabah);
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send({
+            error: "Gagal mendapatkan nasabah",
+            details: error.message
+        });
     }
 })
 
 router.get('/', async (req, res) => {
-    const nasabah = await getAllNasabah()
+    try {
+        const nasabah = await getAllNasabah()
 
-    res.send(nasabah)
+        res.send(nasabah)
+    } catch (error) {
+        res.status(400).send({
+            error: "Gagal mendapatkan nasabah",
+            details: error.message
+        })
+        
+    }
 })
 
 router.put('/:nomorKtp', async (req, res) => {
@@ -46,18 +60,24 @@ router.put('/:nomorKtp', async (req, res) => {
             message: "Nasabah berhasil diupdate"
         })
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send({
+            error: "Gagal mengupdate nasabah",
+            details: error.message
+        })
     }
 })
 
 router.delete('/:nomorKtp', async (req, res) => {
     try {
         const nasabahKtp = req.params.nomorKtp
-        await deleteNasabah(parseInt(nasabahKtp))
+        await deleteNasabah(nasabahKtp)
 
         res.send("Nasabah berhasil dihapus")
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send({
+            error: "Gagal menghapus nasabah",
+            details: error.message
+        })
     }
 })
 

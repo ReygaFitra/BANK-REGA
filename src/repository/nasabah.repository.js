@@ -6,7 +6,7 @@ const insertNasabah = async (nasabahData) => {
             namaLengkap: nasabahData.namaLengkap,
             alamat: nasabahData.alamat,
             tempatLahir: nasabahData.tempatLahir,
-            tanggalLahir: nasabahData.tanggalLahir,
+            tanggalLahir: new Date(nasabahData.tanggalLahir),
             nomorKtp: nasabahData.nomorKtp,
             nomorHandphone: nasabahData.nomorHandphone
         }
@@ -31,13 +31,13 @@ const findAllNasabah = async () => {
 const editNasabah = async (nomorKtp, nasabah) => {
     const newNasabah = await prisma.nasabah.update({
         where: {
-            nomorKtp: parseInt(nomorKtp)
+            nomorKtp: nomorKtp
         },
         data: {
             namaLengkap: nasabah.namaLengkap,
             alamat: nasabah.alamat,
             tempatLahir: nasabah.tempatLahir,
-            tanggalLahir: nasabah.tanggalLahir,
+            tanggalLahir: new Date(nasabah.tanggalLahir),
             nomorKtp: nasabah.nomorKtp,
             nomorHandphone: nasabah.nomorHandphone
         }
