@@ -11,11 +11,10 @@ datasource db {
 }
 
 model Nasabah {
-  id String @id @default(cuid())
+  nomorKtp String @id @unique
   namaLengkap String
   alamat String
   tempatLahir String
   tanggalLahir DateTime
-  nomorKtp String
-  nomorHandphone String
+  nomorHandphone String @unique
 }
