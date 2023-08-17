@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  bank-rega-db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bank-rega
+    networks:
+      - bank-rega-network
+    restart: always
+  bank-rega-app:
+    image: bank-rega:1.2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - bank-rega-db
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:1234@bank-rega-db:5432/bank-rega
+    networks:
+      - bank-rega-network
+
+networks:
+  bank-rega-network:
+    name: bank-rega-network
